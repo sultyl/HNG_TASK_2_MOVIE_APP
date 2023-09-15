@@ -6,12 +6,12 @@ import MovieDetails from './MovieDetails';
 import { fetchTopRatedMovies } from '@/lib/tmdb';
 
 const Tilte = styled.div`
-  width: 100%;
+  width: 100vh;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 44px;
   @media screen and (max-width: 760px) {
-        border: 2px solid red;
     }
 `;
 
