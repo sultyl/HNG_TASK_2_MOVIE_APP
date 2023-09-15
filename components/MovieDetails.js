@@ -1,0 +1,113 @@
+import React, { useState } from 'react'
+import { AiFillHeart } from 'react-icons/ai';
+import styled from 'styled-components';
+
+const CardBox = styled.div`
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+`;
+
+const Image = styled.img`
+  width: 250px;
+  height: 370px;
+`;
+
+const FavoriteIcon = styled(AiFillHeart)`
+  transform: translate(680%, -1200%);
+  background-color: #F3F4F680;
+  border-radius: 50%;
+  padding: 5px;
+  font-size: 30px;
+  color: ${(props) => (props.isFavorite ? 'red' : '#D1D5DB')};
+  cursor: pointer;
+  z-index: 2;
+`;
+
+const Prodc = styled.div`
+  color: var(--gray-400, #9CA3AF);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: normal;
+`;
+
+const CardTitle = styled.div`
+  color: var(--gray-900, #111827);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: normal;
+`;
+
+const RatingDiv = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;
+const RatingBox = styled.div`
+  display: flex;
+  gap: 10px;
+  color: var(--gray-900, #111827);
+  font-size: 12px;
+  font-weight: 400;
+  align-items: center;
+  line-height: 12px; /* 100% */
+`;
+
+const Genre = styled.div`
+  color: var(--gray-400, #9CA3AF);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: normal;
+`;
+
+const MovieDetails = ({movie}) => {
+  console.log(movie);
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const handleFavoriteToggle = () => {
+    setIsFavorite(!isFavorite);
+    const message = isFavorite ? 'Removed from favorites' : 'Added to favorites';
+    alert(message);
+  };
+
+  if (!movie || movie instanceof Promise) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+        <CardBox data-testid='movie-card'>
+          <div>
+            <Image 
+              src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+              alt='image'
+            />
+            {isFavorite && (
+              <FavoriteIcon
+                isFavorite={isFavorite}
+                onClick={handleFavoriteToggle}
+                data-testid="favorite-icon"
+              />
+            )}
+          </div>
+          <Prodc>{movie.release_date}</Prodc>
+          <CardTitle>
+            {movie.original_title}
+          </CardTitle>
+          <RatingDiv>
+            <RatingBox>
+              <img src="/imdb.png" alt="imdb"/>
+              {movie.vote_average} / 10
+            </RatingBox>
+            <RatingBox>
+              <img src="/rotten.png" alt="rotten"/>
+              {movie.vote_average * 10}%
+            </RatingBox>
+          </RatingDiv>
+          <Genre>{movie.genres?.map((genre) => genre.name).join(', ')}</Genre>
+        </CardBox>
+  )
+}
+
+export default MovieDetails;
