@@ -10,6 +10,9 @@ const SearchDiv = styled.div`
     align-items: center;
     border-radius: 6px;
     border: 2px solid var(--gray-300, #D1D5DB);
+    @media screen and (max-width: 760px) {
+        width: 40%;    
+    }
 `;
 const TextArea = styled.textarea`
     margin: 10px;
@@ -28,13 +31,17 @@ const TextArea = styled.textarea`
         font-weight: 400;
         line-height: 24px; /* 150% */
     }
+
+    @media screen and (max-width: 760px) {
+        width: 75%;    
+    }
 `;
 
 export default function Search() { 
     return (
         <SearchDiv>
             <TextArea name='search' id='search' rows='1' cols="60" placeholder="What do you want to watch?" title="Search" aria-label="Search" type="search" />
-            < FiSearch className='text-white'/>
+            < FiSearch className='text-white sm:text-2xl'/>
         </SearchDiv>
     )
 }

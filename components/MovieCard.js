@@ -6,7 +6,7 @@ import MovieDetails from './MovieDetails';
 import { fetchTopRatedMovies } from '@/lib/tmdb';
 
 const Tilte = styled.div`
-  width: 100vh;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -32,12 +32,15 @@ const BoxLink = styled(Link)`
   color: var(--rose-700, #BE123C);
   font-size: 18px;
   font-weight: 400;
+  @media screen and (max-width: 760px) {
+      display: none;
+    }
 `;
 
 const GridBox = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr ;
-  gap: 20px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 60px;
   @media screen and (min-width: 768px) {
         grid-template-columns: 1fr 1fr 1fr 1fr;
         gap: 80px;
