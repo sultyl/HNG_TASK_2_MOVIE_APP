@@ -9,7 +9,6 @@ const Tilte = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: center;
   margin-bottom: 44px;
   @media screen and (max-width: 760px) {
         border: 2px solid red;
@@ -54,15 +53,17 @@ const MovieCard = () => {
   useEffect(() => {
     // Fetch top-rated movies when the component mounts
     fetchTopRatedMovies()
-      .then((data) => {
-        setTopRatedMovies(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error('Error fetching top-rated movies:', error);
-        setLoading(false);
-      });
-  }, []);
+    .then((data) => {
+      // Filter to get only the top 10 rated movies
+      const top10RatedMovies = data.slice(0, 10);
+      setTopRatedMovies(top10RatedMovies);
+      setLoading(false);
+    })
+    .catch((error) => {
+      console.error('Error fetching top-rated movies:', error);
+      setLoading(false);
+    });
+}, []);
 
   return (
     <div className='mt-[70px]' data-testid='movie-card'>
@@ -81,18 +82,12 @@ const MovieCard = () => {
             <div>Loading...</div>
           ) : (
             topRatedMovies.map((movieData) => (
-              <MovieDetails key={movieData.id} movie={movieData} />
+              <MovieDetails 
+                key={movieData.id} 
+                movie={movieData} 
+              />
             ))
           )}
-          {/* <MovieDetails />
-          <MovieDetails />
-          <MovieDetails />
-          <MovieDetails />
-          <MovieDetails />
-          <MovieDetails />
-          <MovieDetails />
-          <MovieDetails />
-          <MovieDetails /> */}
         </GridBox>
       </Center>
     </div>

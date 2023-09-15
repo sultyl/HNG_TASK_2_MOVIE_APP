@@ -76,6 +76,15 @@ const MovieDetails = ({movie}) => {
     return <div>Loading...</div>;
   }
 
+  const productionCountries = movie.production_countries.map((country) => country.iso_3166_1).join(', ');
+
+  // Parse the release date and extract the year
+  const releaseDate = new Date(movie.release_date);
+  const releaseYear = releaseDate.getFullYear();
+
+  const imdbRating = movie.vote_average.toFixed(1);
+  const rottenTomatoesRating = (movie.vote_average * 10).toFixed(0) + '%';
+
   return (
         <CardBox data-testid='movie-card'>
           <div>
@@ -91,18 +100,18 @@ const MovieDetails = ({movie}) => {
               />
             )}
           </div>
-          <Prodc>{movie.release_date}</Prodc>
+          <Prodc>{productionCountries}, {releaseYear}</Prodc>
           <CardTitle>
             {movie.original_title}
           </CardTitle>
           <RatingDiv>
             <RatingBox>
               <img src="/imdb.png" alt="imdb"/>
-              {movie.vote_average} / 10
+              {imdbRating} / 10
             </RatingBox>
             <RatingBox>
               <img src="/rotten.png" alt="rotten"/>
-              {movie.vote_average * 10}%
+              {rottenTomatoesRating}
             </RatingBox>
           </RatingDiv>
           <Genre>{movie.genres?.map((genre) => genre.name).join(', ')}</Genre>
