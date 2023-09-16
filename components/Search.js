@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { styled } from "styled-components"
 import { FiSearch } from "react-icons/fi";
 import ReactModal from 'react-modal';
+import Link from 'next/link';
 
 const SearchDiv = styled.div`
     display: flex;
