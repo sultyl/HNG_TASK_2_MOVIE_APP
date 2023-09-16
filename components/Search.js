@@ -92,11 +92,12 @@ export default function Search() {
             <ReactModal isOpen={isModalOpen} onRequestClose={() => setIsModalOpen(false)}>
                 <GridBox>
                 {movies.map(movie => (
-                    <div key={movie.id}>
+                    <Link href={`/movies/${movie.id}`} key={movie.id}>
                         <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
                         <h2>{movie.title}</h2>
                         <p>{movie.release_date}</p>
-                    </div>
+                    </Link>
+                    
                 ))}
                 </GridBox>
             </ReactModal>
