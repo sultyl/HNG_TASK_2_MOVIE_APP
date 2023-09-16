@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { AiFillStar, AiOutlineBars, AiOutlineDown } from 'react-icons/ai';
+import { AiFillStar, AiOutlineBars, AiOutlineClose, AiOutlineDown } from 'react-icons/ai';
 import { FiCalendar, FiCamera, FiHome, FiLogOut, FiTv } from 'react-icons/fi';
 import { BsBookmark } from 'react-icons/bs';
 import styled from 'styled-components';
 import { fetchTopRatedMovies } from '@/lib/tmdb';
 import { useRouter } from 'next/router';
 import Logo from '@/components/Logo';
+import BarsIcon from '@/components/Bars';
+import ReactModal from 'react-modal';
 
 const Nav = styled.nav`
     width: 226px;
@@ -14,8 +16,11 @@ const Nav = styled.nav`
     border-radius: 0px 45px 45px 0px;
     border: 1px solid rgba(0, 0, 0, 0.30);
     background: #FFF;
-    padding: 52px 20px 69px 20px;
+    padding: 52px 0 69px 0;
     position: fixed;
+    @media screen and (max-width: 760px) {
+      display: none;
+    }
 `;
 
 const NavLink = styled.div`
@@ -23,7 +28,6 @@ const NavLink = styled.div`
     flex-direction: column;
     gap: 47px;
     margin-top: 75px;
-    padding-left: 20px;
 `;
 
 const Links = styled.a`
@@ -32,9 +36,13 @@ const Links = styled.a`
     align-items: center;
     text-decoration: none; /* Added to remove underline */
     color: inherit; /* Added to inherit text color */
+    padding-left: 20px;
     
     &:hover {
         color: #BE123C; /* Added to change color on hover */
+    }
+    @media screen and (max-width: 760px) {
+      font-size: 20px;
     }
 `;
 
@@ -44,6 +52,9 @@ const H1 = styled.h1`
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+    @media screen and (max-width: 760px) {
+      font-size: 18px;
+    }
 `;
 
 const ReferBox = styled.div`
@@ -56,6 +67,7 @@ const ReferBox = styled.div`
     gap: 8px;
     justify-content: center;
     padding: 42px 17px 17px 17px;
+    margin-left: 20px;
 `;
 
 const Button = styled.button`
@@ -71,41 +83,82 @@ const TrailerContainer = styled.div`
   position: relative;
 `;
 
-const PlayButton = styled.button`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: transparent;
-  border: none;
-  font-size: 36px;
-  color: #fff;
-  cursor: pointer;
-  z-index: 1;
-`;
-
 const Box = styled.div`
     display: grid;
     grid-template-columns: 1.9fr 1fr;
     gap: 28px;
+    @media screen and (max-width: 760px) {
+        grid-template-columns: 2fr;
+    }
+`;
+
+const FlexBox = styled.div`
+    @media screen and (max-width: 760px) {
+        display: flex;
+        flex-direction: column;
+    }
 `;
 
 const Title = styled.div`
     color: #404040;
     font-size: 23px;
     font-weight: 500;
+    @media screen and (max-width: 760px) {
+        font-size: 19px;
+        text-align: center;
+    }
 `;
 
 const Overview = styled.div`
     color: #333;
     font-size: 20px;
     font-weight: 400;
+    @media screen and (max-width: 760px) {
+        font-size: 15px;
+    }
 `;
 
 const CrewBox = styled.div`
     color: #333;
     font-size: 20px;
     font-weight: 400;
+    @media screen and (max-width: 760px) {
+        font-size: 15px;
+    }
+`;
+
+const TopR = styled.div`
+    @media screen and (max-width: 760px) {
+        font-size: 10px;
+    }
+`;
+
+const BarButton = styled.button`
+    padding: 10px;
+    @media screen and (min-width: 760px) {
+      display: none;
+    }
+`;
+
+const modalStyles = {
+    position: 'absolute',
+  top: '0',
+  left: '0',
+  right: '0',
+  bottom: '0',
+  padding: '0',
+  background: 'white',
+  border: 'none',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  };
+
+const ModalContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const Movie = () => {
@@ -116,7 +169,7 @@ const Movie = () => {
     const [loading, setLoading] = useState(true);
     const [trailerKey, setTrailerKey] = useState('');
     const [posterUrl, setPosterUrl] = useState('');
-
+    const [isNavModalOpen, setIsNavModalOpen] = useState(false);
 
     useEffect(() => {  
         if (id) {
@@ -176,14 +229,60 @@ const Movie = () => {
 
     return (
         <div className=''>
-            <Nav>
+            <BarButton onClick={() => setIsNavModalOpen(!isNavModalOpen)}>
+                <BarsIcon />
+            </BarButton>
+            <ReactModal
+              isOpen={isNavModalOpen}
+              onRequestClose={() => setIsNavModalOpen(false)}
+              style={modalStyles}
+              appElement={document.getElementById('root')}
+            >
+                <button className="close-button p-2 text-5xl" onClick={() => setIsNavModalOpen(false)}>
+                    <AiOutlineClose />
+                </button>
+                <ModalContainer>
+                    <div id='nav'>
+                    <Logo />
+                    <NavLink>
+                        <Links href="/">
+                            <FiHome />
+                            <H1>Home</H1>
+                        </Links>
+                        <Links href="/" className='bg-[#FCF5F7] p-5'>
+                            <FiCamera />
+                            <H1>Movies</H1>
+                        </Links>
+                        <Links href="/">
+                            <FiTv />
+                            <H1>Tv Series</H1>
+                        </Links>
+                        <Links href="/">
+                            <FiCalendar/>
+                            <H1>Upcoming</H1>
+                        </Links>
+                        <ReferBox>
+                            <h2 className='text-[13px] font-semibold text-[#5A5A5A]'>Play movie quizzes and earn free tickets</h2>
+                            <p className='text-[#666] font-medium text-[10px]'>50k people are playing now</p>
+                            <Button>Start Playing</Button>
+                        </ReferBox>
+                        <Links href="/">
+                            <FiLogOut />
+                            <H1>Logout</H1>
+                        </Links>
+                    </NavLink>
+                    </div>
+                </ModalContainer>
+            </ReactModal>
+
+            <Nav id='nav'>
                 <Logo />
                 <NavLink>
                     <Links href="/">
                         <FiHome />
                         <H1>Home</H1>
                     </Links>
-                    <Links href="/" className=''>
+                    <Links href="/" className='bg-[#FCF5F7] p-5'>
                         <FiCamera />
                         <H1>Movies</H1>
                     </Links>
@@ -225,8 +324,10 @@ const Movie = () => {
                 <Box>
                     <div className='flex flex-col gap-9'>
                         <div className='flex flex-col gap-[27px]'>
-                            <div className='flex gap-4 items-center'>
-                                <Title><span data-testid='movie-title'>{movieDetails?.title}</span> • <span data-testid='movie-release-date'>{movieDetails?.release_date?.substring(0, 4)}</span> • PG-{movieDetails?.adult} • <span data-testid='movie-runtime'>{movieDetails?.runtime} minutes</span></Title>
+                            <FlexBox className='flex gap-4 items-center '>
+                                <Title>
+                                    <span data-testid='movie-title'>{movieDetails?.title}</span> • <span data-testid='movie-release-date'>{movieDetails?.release_date?.substring(0, 4)}</span> • PG-13 • <span data-testid='movie-runtime'>{movieDetails?.runtime} minutes</span>
+                                </Title>
                                 <span>
                                     <div className='flex gap-3'>
                                         {movieDetails?.genres.map((genre, index) => (
@@ -238,7 +339,7 @@ const Movie = () => {
                                         ))}
                                     </div>
                                 </span>
-                            </div>
+                            </FlexBox>
                             <Overview data-testid='movie-overview'>
                                 {movieDetails?.overview}
                             </Overview>
@@ -250,13 +351,13 @@ const Movie = () => {
                             <h2>Stars : <span className='text-[#BE123C]'>{movieDetails?.stars}</span></h2>
                         </CrewBox>
 
-                        <div className='border border[#C7C7C7] rounded-xl flex justify-between items-center text-[20px] pr-6'> 
+                        <TopR className='border border[#C7C7C7] rounded-xl flex justify-between items-center text-[20px] pr-6'> 
                             <div className='flex gap-6'>
                                 <h2 className='bg-[#BE123C] text-white rounded-xl p-3'>Top rated movie #65</h2>
                                 <h2 className='p-3'>Award 9 nominations</h2>
                             </div>
                             <AiOutlineDown />
-                        </div>
+                        </TopR>
                     </div>
                     <div className='flex flex-col gap-8'>
                         <div className='flex flex-col gap-3 text-xl'>
