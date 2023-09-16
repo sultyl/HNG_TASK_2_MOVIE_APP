@@ -32,6 +32,9 @@ const FavoriteIcon = styled(AiFillHeart)`
   color: ${(props) => (props.isFavorite ? 'red' : '#D1D5DB')};
   cursor: pointer;
   z-index: 2;
+  @media screen and (max-width: 760px) {
+    transform: translate(60px, -120px);
+  }
 `;
 
 const Prodc = styled.div`
