@@ -43,6 +43,20 @@ const TextArea = styled.textarea`
     }
 `;
 
+const Prodc = styled.div`
+  color: var(--gray-400, #9CA3AF);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: normal;
+`;
+
+const CardTitle = styled.div`
+  color: var(--gray-900, #111827);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: normal;
+`;
+
 const GridBox = styled.div`
   display: grid;
   grid-template-columns: 2fr;
@@ -95,8 +109,8 @@ export default function Search() {
                 {movies.map(movie => (
                     <Link href={`/movies/${movie.id}`} key={movie.id}>
                         <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
-                        <h2>{movie.title}</h2>
-                        <p>{movie.release_date}</p>
+                        <CardTitle>{movie.title}</CardTitle>
+                        <Prodc>{movie.release_date}</Prodc>
                     </Link>
                     
                 ))}
