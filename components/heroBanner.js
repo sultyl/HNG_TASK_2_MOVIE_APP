@@ -63,18 +63,30 @@ const ButtonDiv = styled.div`
   }
 `;
 
+const FlexBox = styled.div`
+  @media screen and (max-width: 760px) {
+      display: flex;
+    }
+`;
+
 export default function HeroBanner() {
   return (
       <div className='w-[450px] lg:w-full h-[600px] bg-[url(../assets/john_wick.png)] bg-cover boverg-no-repeat text-white'>
         <StyledDiv>
-          <Center>
-            <div className='flex justify-between'>
-              <Logo />
-              <Search />
-              <ButtonDiv className='flex items-center gap-4'>
+        <div className='flex justify-between'>
+        
+        <Logo />
+        <ButtonDiv className='flex items-center gap-4'>
                 <button>Sign in</button>
                 <BarsIcon /> 
-              </ButtonDiv>  
+              </ButtonDiv>
+        </div>
+        
+          <Center>
+            <div className='flex justify-between ml-[500px]'>
+              
+              <Search />
+                
             </div>
             <DescBox>
               <DescTitle>
