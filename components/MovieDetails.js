@@ -110,7 +110,19 @@ const MovieDetails = ({movie}) => {
                 onClick={handleFavoriteToggle}
                 data-testid="favorite-icon"
               />
+                  <AiFillHeart
+  className={`absolute top-10 right-10 bg-opacity-70 rounded-full p-1 text-xl ${
+    isFavorite ? 'text-red-500' : 'text-gray-300'
+  } cursor-pointer z-20`}
+/>
+
             )}
+              <AiFillHeart
+  className={`absolute top-10 right-10 bg-opacity-70 rounded-full p-1 text-xl ${
+    isFavorite ? 'text-red-500' : 'text-gray-300'
+  } cursor-pointer z-20`}
+/>
+
           </div>
           <Prodc data-testid='movie-release-date'>{productionCountries}, {releaseYear}</Prodc>
           <CardTitle data-testid='movie-title'>
