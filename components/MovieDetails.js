@@ -8,11 +8,19 @@ const CardBox = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 12px;
+  @media screen and (max-width: 760px) {
+    width: 300px;
+    margin-left: 40px;
+  }
 `;
 
 const Image = styled.img`
   width: 250px;
   height: 370px;
+  @media screen and (max-width: 760px) {
+    width: 300px;
+    height: 400px;
+  }
 `;
 
 const FavoriteIcon = styled(AiFillHeart)`

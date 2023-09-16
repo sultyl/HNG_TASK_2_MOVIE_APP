@@ -11,6 +11,7 @@ const Tilte = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 44px;
+  margin-left: 20px;
   @media screen and (max-width: 760px) {
     }
 `;
@@ -33,13 +34,13 @@ const BoxLink = styled(Link)`
   font-size: 18px;
   font-weight: 400;
   @media screen and (max-width: 760px) {
-      display: none;
+      /* display: none; */
     }
 `;
 
 const GridBox = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 2fr;
   gap: 60px;
   @media screen and (min-width: 768px) {
         grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -70,7 +71,7 @@ const MovieCard = () => {
 
   return (
     <div className='mt-[70px]' data-testid='movie-card'>
-      <Center>
+      <>
         <Tilte>
           <H1>Top Rated Movies</H1>
           <BoxLink href='/'>
@@ -80,6 +81,7 @@ const MovieCard = () => {
             </svg>
           </BoxLink>
         </Tilte>
+        <Center>
         <GridBox>
           {loading ? (
             <div>Loading...</div>
@@ -94,7 +96,8 @@ const MovieCard = () => {
             ))
           )}
         </GridBox>
-      </Center>
+        </Center>
+      </>
     </div>
   )
 }
