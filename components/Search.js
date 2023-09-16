@@ -42,6 +42,16 @@ const TextArea = styled.textarea`
     }
 `;
 
+const GridBox = styled.div`
+  display: grid;
+  grid-template-columns: 2fr;
+  gap: 60px;
+  @media screen and (min-width: 768px) {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        gap: 80px;
+    }
+`;
+
 export default function Search() {
     const [searchTerm, setSearchTerm] = useState('');
     const [loading, setLoading] = useState(false);
@@ -80,6 +90,7 @@ export default function Search() {
                 </button>
             </SearchDiv>
             <ReactModal isOpen={isModalOpen} onRequestClose={() => setIsModalOpen(false)}>
+                <GridBox>
                 {movies.map(movie => (
                     <div key={movie.id}>
                         <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
@@ -87,6 +98,7 @@ export default function Search() {
                         <p>{movie.release_date}</p>
                     </div>
                 ))}
+                </GridBox>
             </ReactModal>
         </form>
     );
