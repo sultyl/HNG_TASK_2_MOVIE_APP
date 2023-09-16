@@ -11,7 +11,8 @@ const SearchDiv = styled.div`
     border-radius: 6px;
     border: 2px solid var(--gray-300, #D1D5DB);
     @media screen and (max-width: 760px) {
-        width: 40%;    
+        width: 40%;
+        padding: 3px 5px;
     }
 `;
 const TextArea = styled.textarea`
@@ -33,7 +34,10 @@ const TextArea = styled.textarea`
     }
 
     @media screen and (max-width: 760px) {
-        width: 75%;    
+        width: 75%; 
+        &::placeholder {
+        font-size: 9px;
+    }   
     }
 `;
 

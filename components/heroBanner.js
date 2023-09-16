@@ -57,18 +57,24 @@ const ButtonText = styled.h3`
   text-transform: uppercase;
 `;
 
+const ButtonDiv = styled.div`
+  @media screen and (max-width: 760px) {
+    font-size: 16px;
+  }
+`;
+
 export default function HeroBanner() {
   return (
-      <div className='w-full lg:w-full h-[600px] bg-[url(../assets/john_wick.png)] bg-cover boverg-no-repeat text-white'>
+      <div className='w-[500px] lg:w-full h-[600px] bg-[url(../assets/john_wick.png)] bg-cover boverg-no-repeat text-white'>
         <StyledDiv>
           <Center>
             <div className='flex justify-between'>
               <Logo />
               <Search />
-              <div className='flex items-center gap-4'>
+              <ButtonDiv className='flex items-center gap-4'>
                 <button>Sign in</button>
                 <BarsIcon /> 
-              </div>  
+              </ButtonDiv>  
             </div>
             <DescBox>
               <DescTitle>
