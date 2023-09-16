@@ -85,10 +85,12 @@ const MovieCard = () => {
             <div>Loading...</div>
           ) : (
             topRatedMovies.map((movieData) => (
-              <MovieDetails 
-                key={movieData.id} 
-                movie={movieData} 
-              />
+              <Link href={`/movies/${movieData.id}`} key={movieData.id}>  
+                <MovieDetails 
+                  key={movieData.id} 
+                  movie={movieData} 
+                />
+              </Link>
             ))
           )}
         </GridBox>

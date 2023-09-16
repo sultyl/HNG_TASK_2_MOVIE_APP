@@ -88,7 +88,8 @@ const MovieDetails = ({movie}) => {
   return (
         <CardBox data-testid='movie-card'>
           <div>
-            <Image 
+            <Image
+              data-testid='movie-poster' 
               src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
               alt='image'
             />
@@ -100,8 +101,8 @@ const MovieDetails = ({movie}) => {
               />
             )}
           </div>
-          <Prodc>{productionCountries}, {releaseYear}</Prodc>
-          <CardTitle>
+          <Prodc data-testid='movie-release-date'>{productionCountries}, {releaseYear}</Prodc>
+          <CardTitle data-testid='movie-title'>
             {movie.original_title}
           </CardTitle>
           <RatingDiv>
