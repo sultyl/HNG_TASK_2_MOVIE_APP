@@ -83,7 +83,7 @@ export default function HeroBanner() {
         </div>
         
           <Center>
-            <div className='flex justify-between ml-[500px]'>
+            <div className='flex justify-between lg:ml-[500px]'>
               
               <Search />
                 
