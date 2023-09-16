@@ -24,7 +24,9 @@ const Image = styled.img`
 `;
 
 const FavoriteIcon = styled(AiFillHeart)`
-  transform: translate(680%, -1200%);
+  position: absolute;
+  top: 10px;
+  right: 10px;
   background-color: #F3F4F680;
   border-radius: 50%;
   padding: 5px;
@@ -32,9 +34,6 @@ const FavoriteIcon = styled(AiFillHeart)`
   color: ${(props) => (props.isFavorite ? 'red' : '#D1D5DB')};
   cursor: pointer;
   z-index: 2;
-  @media screen and (max-width: 760px) {
-    transform: translate(60px, -120px);
-  }
 `;
 
 const Prodc = styled.div`
