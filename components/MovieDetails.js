@@ -15,6 +15,7 @@ const CardBox = styled.div`
 `;
 
 const Image = styled.img`
+  position: relative;
   width: 250px;
   height: 370px;
   @media screen and (max-width: 760px) {
